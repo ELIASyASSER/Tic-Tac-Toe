@@ -60,7 +60,7 @@ function resetting() {
     isGameOver = false;
     cells.forEach(element => {
         element.textContent = ''
-        element.style.backgroundColor = 'white'
+        element.style.backgroundColor = ""
     });
 
 }

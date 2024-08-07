@@ -49,11 +49,7 @@ function handleClick(e) {
         }
     }
 
-    function checkWin() {
-        return winningCombos.some((combo)=>{
-            return combo.every((el)=>board[el] == currentPlayer)
-        })
-    }
+    
     
     
 }
@@ -64,6 +60,24 @@ function resetting() {
     isGameOver = false;
     cells.forEach(element => {
         element.textContent = ''
+        element.style.backgroundColor = 'white'
     });
 
+}
+function checkWin() {
+     // return winningCombos.some((combo)=>{
+    // return combo.every((el)=>board[el] == currentPlayer)
+    // })
+    for (const combo of winningCombos) {
+        const [a,b,c] = combo;
+        if(board[c] == currentPlayer && board[a]==board[b]&& board[a]==board[c]){
+            cells.forEach(cell=>{
+                cells[a].style.backgroundColor = 'rgb(0,0,255,0.5)'
+                cells[b].style.backgroundColor = 'rgb(0,0,255,0.5)'
+                cells[c].style.backgroundColor = 'rgb(0,0,255,0.5)'
+            })
+            return true;
+
+        }
+    }
 }

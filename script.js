@@ -19,11 +19,13 @@ cells.forEach(cell=>{
     cell.addEventListener("click",handleClick)
 })
 reset.addEventListener("click",resetting)
+
 function handleClick(e) {
     let index = e.target.dataset.index;
-    if(board[index]=="" || !isGameOver){
+    if(board[index] == "" || !isGameOver){
         board[index] = currentPlayer;
         e.target.textContent = currentPlayer
+        e.target.style = "pointer-events:none;"
 
         if(checkWin()){
             setTimeout(() => {
@@ -34,7 +36,7 @@ function handleClick(e) {
             
 
         }
-        else if(board.every(item=>item !="")){
+        else if(board.every(item=>item != "" )){
             setTimeout(() => {
                 alert('DRAW !!' )
                 resetting()
@@ -44,14 +46,12 @@ function handleClick(e) {
             isGameOver = true;
 
         }
+        
         else{
             currentPlayer = currentPlayer ==='X'?'O':'X';
         }
     }
 
-    
-    
-    
 }
 function resetting() {
     
@@ -64,10 +64,18 @@ function resetting() {
     });
 
 }
+
 function checkWin() {
-     // return winningCombos.some((combo)=>{
+
+
+    // return winningCombos.some((combo)=>{
     // return combo.every((el)=>board[el] == currentPlayer)
     // })
+
+
+
+
+
     for (const combo of winningCombos) {
         const [a,b,c] = combo;
         if(board[c] == currentPlayer && board[a]==board[b]&& board[a]==board[c]){
@@ -76,6 +84,7 @@ function checkWin() {
                 cells[b].style.backgroundColor = 'rgb(0,0,255,0.5)'
                 cells[c].style.backgroundColor = 'rgb(0,0,255,0.5)'
             })
+            
             return true;
 
         }
